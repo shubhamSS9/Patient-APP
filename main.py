@@ -5,8 +5,18 @@ from typing import Annotated, Literal
 from typing import Annotated, Literal, Optional
 import json
 
-
 app = FastAPI()
+
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://patient-frontend.onrender.com", "http://localhost:5500"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 class Patient(BaseModel):
     id: Annotated[str, Field(..., description='ID of the patient', examples=['P001'])]
@@ -160,4 +170,9 @@ def delete_patient(patient_id: str):
     save_data(data)
 
     return JSONResponse(status_code=200, content={'message':'patient deleted'})
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 
