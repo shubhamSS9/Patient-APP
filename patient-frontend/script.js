@@ -4,10 +4,7 @@ async function fetchPatient() {
 
   try {
     const response = await fetch(`https://patient-app-0buq.onrender.com/patient/${patientId}`);
-    if (!response.ok) {
-      throw new Error("Patient not found");
-    }
-
+    if (!response.ok) throw new Error("Patient not found");
     const data = await response.json();
 
     resultDiv.innerHTML = `
@@ -21,6 +18,6 @@ async function fetchPatient() {
       <p><b>Verdict:</b> ${data.verdict}</p>
     `;
   } catch (error) {
-    resultDiv.innerHTML = `<p style="color:red;">${error.message}</p>`;
+    resultDiv.innerHTML = `<p style='color:red;'>${error.message}</p>`;
   }
 }
