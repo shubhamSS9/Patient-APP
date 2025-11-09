@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, computed_field
 from typing import Annotated, Literal
 from typing import Annotated, Literal, Optional
+from fastapi.middleware.cors import CORSMiddleware
 import json
 
 app = FastAPI()
@@ -11,7 +12,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://patient-frontend.onrender.com", "http://localhost:5500"],
+    allow_origins=[
+        "https://patient-frontend-mdhp.onrender.com",  # Your frontend Render URL
+        "http://localhost:5500",  # For local testing
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
