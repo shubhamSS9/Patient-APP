@@ -10,16 +10,19 @@ app = FastAPI()
 
 from fastapi.middleware.cors import CORSMiddleware
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://patient-frontend-mdhp.onrender.com",  # Your frontend Render URL
-        "http://localhost:5500",  # For local testing
+        "https://patient-frontend-mdhp.onrender.com",  # ✅ Your frontend Render URL
+        "http://localhost:5500",                      # ✅ For local testing
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 
 class Patient(BaseModel):
