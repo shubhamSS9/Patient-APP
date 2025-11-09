@@ -1,15 +1,13 @@
 async function fetchPatient() {
-  const id = document.getElementById('patientId').value.trim();
-  const resultDiv = document.getElementById('result');
-
-  if (!id) {
-    resultDiv.innerHTML = "<p style='color:red;'>Please enter a patient ID.</p>";
-    return;
-  }
+  const patientId = document.getElementById("patientId").value;
+  const resultDiv = document.getElementById("result");
 
   try {
-    const response = await fetch(`https://patient-app-0buq.onrender.com/patient/${id}`);
-    if (!response.ok) throw new Error("Patient not found");
+    const response = await fetch(`https://patient-app-0buq.onrender.com/patient/${patientId}`);
+    if (!response.ok) {
+      throw new Error("Patient not found");
+    }
+
     const data = await response.json();
 
     resultDiv.innerHTML = `
@@ -23,6 +21,6 @@ async function fetchPatient() {
       <p><b>Verdict:</b> ${data.verdict}</p>
     `;
   } catch (error) {
-    resultDiv.innerHTML = `<p style='color:red;'>${error.message}</p>`;
+    resultDiv.innerHTML = `<p style="color:red;">${error.message}</p>`;
   }
 }
